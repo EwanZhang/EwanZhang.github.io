@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的博客是如何搭建的(VPS + GitHub Pages + Nginx + Hexo + Hexo_Admin管理 + 图床) | Mr.ZYZ Blog</title>
+  <title>活着 | Mr.ZYZ Blog</title>
   <meta name="author" content="ZYZ">
   
   <meta name="description" content="记录一些IT，艺术有关的个人笔记">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="我的博客是如何搭建的(VPS + GitHub Pages + Nginx + Hexo + Hexo_Admin管理 + 图床)"/>
+  <meta property="og:title" content="活着"/>
   <meta property="og:site_name" content="Mr.ZYZ Blog"/>
 
   
@@ -45,7 +45,7 @@
   <div class="container" id="container">
 	<div class="content">
 	  <div class="page-header">		
-  <h1><a class="brand" href="/">Mr.ZYZ Blog</a><span class="split"></span><span class="title">我的博客是如何搭建的(VPS + GitHub Pages + Nginx + Hexo + Hexo_Admin管理 + 图床)</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2016-06-30</span></h1>
+  <h1><a class="brand" href="/">Mr.ZYZ Blog</a><span class="split"></span><span class="title">活着</span><span class="date" id="title-date"><i class="fa fa-clock-o"></i> 2016-06-30</span></h1>
 </div>		
 
 <div class="row page">
@@ -58,46 +58,7 @@
 	  
 
 	  <!-- content -->
-	  <p><strong>博客部署在VPS（搬瓦工，系统是：CentOS 6 x86_64）上面，因为同时部署了图床，所以使用Nginx+PHP，如果不需要图床，使用Apache即可。GitHub只用作备份和备用线路。</strong></p>
-<h1 id="一-Nginx-PHP"><a href="#一-Nginx-PHP" class="headerlink" title="一 . Nginx+PHP"></a>一 . Nginx+PHP</h1><p><strong><em>如果不需要图床（qchan），可以跳过这一步，直接从“ 二 . Hexo ”开始。</em></strong></p>
-<p>安装前准备:<br><code>yum -y install gcc git openssl openssl-devel zlib zlib-devel</code>  </p>
-<h2 id="1-1-安装Nginx"><a href="#1-1-安装Nginx" class="headerlink" title="1.1 安装Nginx:"></a>1.1 安装Nginx:</h2><ol>
-<li><p>下载对应当前系统版本的nginx包<br><code># wget  http://nginx.org/packages/centos/6/x86_64/RPMS/nginx-1.10.1-1.el6.ngx.x86_64.rpm</code>  </p>
-</li>
-<li><p>建立nginx的yum仓库<br><code># rpm -ivh nginx-1.10.1-1.el6.ngx.x86_64.rpm</code>  </p>
-</li>
-<li><p>启动nginx服务<br><code># systemctl start nginx</code>  </p>
-</li>
-<li><p>配置<br>默认的配置文件在<code>/etc/nginx</code> (多站点可以在<code>/etc/nginx/conf.d</code>路径下配置<code>*.conf</code>)路径下，使用该配置已经可以正确地运行nginx；如需要自定义，修改其下的 <code>nginx.conf</code> 等文件即可。  </p>
-</li>
-<li><p>测试<br>在浏览器地址栏中输入部署nginx环境的机器的IP，如果一切正常，应该能看到如下字样的内容。  </p>
-</li>
-</ol>
-<h2 id="1-2-安装PHP"><a href="#1-2-安装PHP" class="headerlink" title="1.2 安装PHP"></a>1.2 安装PHP</h2><ol>
-<li><p>使用yum安装PHP<br><code># yum install php php-fpm php-bcmatch php-gd php-mbstring php-mcrypt php-mysql</code>  </p>
-</li>
-<li><p>配置<br>PHP配置文件<code>php.ini</code>路径： <code>/etc/php.ini</code></p>
-</li>
-<li><p>启动php-fpm<br><code>service php-fpm start</code>  </p>
-</li>
-</ol>
-<h1 id="二-Hexo"><a href="#二-Hexo" class="headerlink" title="二 . Hexo"></a>二 . Hexo</h1><h2 id="2-1-建立GitHub-Pages"><a href="#2-1-建立GitHub-Pages" class="headerlink" title="2.1 建立GitHub Pages"></a>2.1 建立GitHub Pages</h2><p>GitHub Pages可以免费托管静态页面，自带主题、支持自制页面。<br>创建GitHub Pages需要有一个GitHub账号，然后创建一个仓库就可以了。但是仓库的命名格式必须为：yourusername.github.io（yourusername是你的GitHub用户名，下图中GitHub用户名为ewanzhang，所以仓库命名为ewanzhang.github.io），然后点击Crerte repository就可以了。<br><img src="http://tu.mrzyz.com/uploads/2016/07/20160702095853.jpg" alt="">  </p>
-<h2 id="2-2-部署Hexo"><a href="#2-2-部署Hexo" class="headerlink" title="2.2 部署Hexo"></a>2.2 部署Hexo</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。  </p>
-<h3 id="2-2-1-安装Hexo"><a href="#2-2-1-安装Hexo" class="headerlink" title="2.2.1 安装Hexo"></a>2.2.1 安装Hexo</h3><p>本步骤使用<strong><em>CentOS 6 x86_64</em></strong>，若为其他系统或有疑问，请参考：<a href="http://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo官方中文文档</a>  </p>
-<p><strong>安装前提</strong><br>安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：  </p>
-<ul>
-<li>Node.js  </li>
-<li>Git  </li>
-</ul>
-<p>如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
-<p>如果您的电脑中尚未安装所需要的程序，请根据以下安装指示完成安装。  </p>
-<p><strong>1. 安装 Git</strong><br>Linux (Fedora, Red Hat, CentOS)：<code>sudo yum install git-core</code><br><strong>2. 安装 Node.js</strong><br>安装 Node.js 的最佳方式是使用 nvm。<br>cURL:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># curl https://raw.github.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure></p>
-<p>Wget:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure></p>
-<p>安装完成后，重启终端并执行下列命令即可安装 Node.js。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># nvm install 4</div></pre></td></tr></table></figure></p>
-<p><strong>3.安装 Hexo</strong><br>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># npm install -g hexo-cli</div></pre></td></tr></table></figure></p>
-<h3 id="2-2-2-建站"><a href="#2-2-2-建站" class="headerlink" title="2.2.2 建站"></a>2.2.2 建站</h3><p>Hexo安装好之后，就可以开始建站了。打开终端cd到你需要的路径下，并使用如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init yourname</div><div class="line">cd yourname</div><div class="line">npm install</div></pre></td></tr></table></figure></p>
-<p><code>yourname</code>为文件夹名，可以根据需要自己设定。</p>
-<p><strong><em>未完待续</em></strong></p>
+	  <p>活着</p>
 	  
 
 	  <div>
@@ -109,8 +70,6 @@
 	
 	
 	
-	
-		
 	
 		
 			
